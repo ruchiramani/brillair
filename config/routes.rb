@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :products
+  devise_for :users, :controllers => { :registrations => 'users' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -15,6 +16,12 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 root to: 'pages#index'
+  
+
+  devise_scope :user do
+       get 'users/seller_page' => "users#becomeseller"
+       post 'users/seller_page' => "users#becomeseller"
+     end
 
   # Example resource route with options:
   #   resources :products do
